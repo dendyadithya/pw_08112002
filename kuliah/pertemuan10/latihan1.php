@@ -20,6 +20,9 @@
       <th>Email</th>
       <th>Jurusan</th>
     </tr>
+    <tr>
+      <td></td>
+    </tr>
   </table>
 </body>
 
