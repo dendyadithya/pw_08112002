@@ -19,3 +19,17 @@ function query($query)
   }
   return $rows;
 }
+
+function tambahData($data)
+{
+  $conn = connection();
+
+  $nrp = $data['nrp'];
+  $nama = $data['nama'];
+  $email = $data['email'];
+  $jurusan = $data['jurusan'];
+  $gambar = $data['gambar'];
+
+  $query = "INSERT INTO `data` (`nrp`, `nama`, `email`, `jurusan`, `gambar`) VALUES ('$nrp', '$nama', '$email', '$jurusan', '$gambar');";
+  mysqli_query($conn, $query);
+}

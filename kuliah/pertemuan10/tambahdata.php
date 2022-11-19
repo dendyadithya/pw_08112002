@@ -2,8 +2,8 @@
 require_once 'functions.php';
 
 if (isset($_POST['tambah'])) {
-  // tambah($_POST);
-  var_dump($_POST);
+  tambahData($_POST);
+  // var_dump($_POST);
 }
 ?>
 
@@ -21,25 +21,28 @@ if (isset($_POST['tambah'])) {
 <body>
   <h3>Form Tambah Data Mahasiswa</h3>
 
-  <form action="" method="POST"></form>
-  <ul>
-    <li><label>NRP :
-        <input type="text" name="nrp" autofocus>
-      </label></li>
-    <li><label>Nama :
-        <input type="text" name="nama">
-      </label></li>
-    <li><label>Email :
-        <input type="text" name="email">
-      </label></li>
-    <li><label>Jurusan :
-        <input type="text" name="jurusan">
-      </label></li>
-    <li><label>Gambar :
-        <input type="text" name="gambar">
-      </label></li>
-    <li><button type="submit" name="tambah">Tambah Data</button></li>
-  </ul>
+  <form action="" method="POST">
+    <ul>
+      <li><label>NRP :
+          <input type="text" name="nrp" autofocus>
+        </label></li>
+      <li><label>Nama :
+          <input type="text" name="nama">
+        </label></li>
+      <li><label>Email :
+          <input type="text" name="email">
+        </label></li>
+      <li><label>Jurusan :
+          <input type="text" name="jurusan">
+        </label></li>
+      <li><label>Gambar :
+          <input type="text" name="gambar">
+        </label></li>
+      <li><button type="submit" name="tambah">Tambah Data</button></li>
+      <br><br>
+      <li><a href="latihan3.php">Kembali ke daftar mahasiswa</a></li>
+    </ul>
+  </form>
 </body>
 
 </html>
