@@ -2,8 +2,14 @@
 require_once 'functions.php';
 
 if (isset($_POST['tambah'])) {
-  tambahData($_POST);
-  // var_dump($_POST);
+  if (tambahData($_POST) > 0) {
+    echo "<script>
+      alert('data berhasil ditambahkan');
+      document.location.href = 'latihan3.php';
+    </script>";
+  } else {
+    echo "Data Tidak Berhasil ditambahkan";
+  }
 }
 ?>
 
@@ -24,20 +30,25 @@ if (isset($_POST['tambah'])) {
   <form action="" method="POST">
     <ul>
       <li><label>NRP :
-          <input type="text" name="nrp" autofocus>
+          <input type="text" name="nrp" autofocus required>
         </label></li>
+      <br>
       <li><label>Nama :
-          <input type="text" name="nama">
+          <input type="text" name="nama" required>
         </label></li>
+      <br>
       <li><label>Email :
-          <input type="text" name="email">
+          <input type="text" name="email" required>
         </label></li>
+      <br>
       <li><label>Jurusan :
-          <input type="text" name="jurusan">
+          <input type="text" name="jurusan" required>
         </label></li>
+      <br>
       <li><label>Gambar :
-          <input type="text" name="gambar">
+          <input type="text" name="gambar" required>
         </label></li>
+      <br>
       <li><button type="submit" name="tambah">Tambah Data</button></li>
       <br><br>
       <li><a href="latihan3.php">Kembali ke daftar mahasiswa</a></li>

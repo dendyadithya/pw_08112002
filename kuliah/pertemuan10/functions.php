@@ -24,12 +24,14 @@ function tambahData($data)
 {
   $conn = connection();
 
-  $nrp = $data['nrp'];
-  $nama = $data['nama'];
-  $email = $data['email'];
-  $jurusan = $data['jurusan'];
-  $gambar = $data['gambar'];
+  $nrp = htmlspecialchars($data['nrp']);
+  $nama = htmlspecialchars($data['nama']);
+  $email = htmlspecialchars($data['email']);
+  $jurusan = htmlspecialchars($data['jurusan']);
+  $gambar = htmlspecialchars($data['gambar']);
 
   $query = "INSERT INTO `data` (`nrp`, `nama`, `email`, `jurusan`, `gambar`) VALUES ('$nrp', '$nama', '$email', '$jurusan', '$gambar');";
   mysqli_query($conn, $query);
+  echo mysqli_error($conn);
+  return mysqli_affected_rows($conn);
 }
