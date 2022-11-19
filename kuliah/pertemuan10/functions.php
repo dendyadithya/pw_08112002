@@ -32,6 +32,7 @@ function tambahData($data)
 
   $query = "INSERT INTO `data` (`nrp`, `nama`, `email`, `jurusan`, `gambar`) VALUES ('$nrp', '$nama', '$email', '$jurusan', '$gambar');";
   mysqli_query($conn, $query);
-  echo mysqli_error($conn);
-  return mysqli_affected_rows($conn);
+  // echo mysqli_error($conn);
+  // return mysqli_affected_rows($conn);
+
 }
