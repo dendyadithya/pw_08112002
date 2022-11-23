@@ -32,7 +32,6 @@ function tambahData($data)
 
   $query = "INSERT INTO `data` (`nrp`, `nama`, `email`, `jurusan`, `gambar`) VALUES ('$nrp', '$nama', '$email', '$jurusan', '$gambar');";
   mysqli_query($conn, $query) or die(mysqli_error($conn));
-  // echo mysqli_error($conn);
   return mysqli_affected_rows($conn);
 }
 
@@ -84,14 +83,70 @@ function login($data)
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  if (query("SELECT * FROM user WHERE username = '$username' && password = '$password'")) {
-    $_SESSION['login'] = true;
+  if ($user = query("SELECT * FROM user WHERE username = '$username'")) {
+    if (password_verify($password, $user['password']))
+
+      $_SESSION['login'] = true;
     header("Location: index.php");
     exit;
-  } else {
-    return [
-      'error' => true,
-      'message' => 'Username / Password Salah'
-    ];
   }
+  return [
+    'error' => true,
+    'message' => 'Username / Password Salah'
+  ];
+}
+
+function registrasi($data)
+{
+  $conn = connection();
+
+  $username = htmlspecialchars($data['username']);
+  $password1 = mysqli_real_escape_string($conn, $data['password1']);
+  $password2 = mysqli_real_escape_string($conn, $data['password2']);
+
+  if (empty($username) || empty($password1) || empty($password2)) {
+    echo "<script>
+    alert('Username dan Password tidak boleh kosong');
+    document.location.href = 'registrasi.php';
+  </script>";
+    return false;
+  }
+
+  if (query("SELECT * FROM user WHERE username = '$username'")) {
+    echo "<script>
+    alert('Username sudah terdaftar');
+    document.location.href = 'registrasi.php';
+  </script>";
+    return false;
+  }
+
+  if ($password1 !== $password2) {
+    echo "<script>
+    alert('Password tidak sama');
+    document.location.href = 'registrasi.php';
+  </script>";
+    return false;
+  }
+
+  if (strlen($password1) < 5) {
+    echo "<script>
+    alert('Password harus lebih dari 5 karakter');
+    document.location.href = 'registrasi.php';
+  </script>";
+    return false;
+  }
+
+  $pattern = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/';
+  if (!preg_match($pattern, $password1)) {
+    echo "<script>
+    alert('Password harus mengandung huruf besar dan symbol');
+    document.location.href = 'registrasi.php';
+  </script>";
+    return false;
+  }
+
+  $password_baru = password_hash($password1, PASSWORD_DEFAULT);
+  $query = "INSERT INTO `user` (`username`, `password`) VALUES ('$username', '$password_baru');";
+  mysqli_query($conn, $query) or die(mysqli_error($conn));
+  return mysqli_affected_rows($conn);
 }

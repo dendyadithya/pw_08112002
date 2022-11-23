@@ -1,11 +1,4 @@
 <?php
-session_start();
-
-if (isset($_SESSION['login'])) {
-  header("Location: index.php");
-  exit;
-}
-
 require 'functions.php';
 
 if (isset($_POST['login'])) {
@@ -47,6 +40,8 @@ if (isset($_POST['login'])) {
       <li>
         <button type="submit" name="login">Login</button>
       </li>
+      <br>
+      <li><a href="registrasi.php">Registrasi disini</a></li>
     </ul>
   </form>
 
