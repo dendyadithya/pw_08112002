@@ -63,3 +63,16 @@ function ubahData($data)
     echo $e->getMessage();
   }
 }
+
+function cariData($keyword)
+{
+  $conn = connection();
+
+  $query = "SELECT * FROM data WHERE nama LIKE '%$keyword%'";
+  $result = mysqli_query($conn, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+  return $rows;
+}

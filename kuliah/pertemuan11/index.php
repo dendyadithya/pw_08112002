@@ -2,6 +2,9 @@
 require 'functions.php';
 $mahasiswa = query("SELECT * FROM data");
 
+if (isset($_POST['cari'])) {
+  $mahasiswa = cariData($_POST['keyword']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +23,12 @@ $mahasiswa = query("SELECT * FROM data");
   <a href="tambahdata.php">Tambah data mahasiswa</a>
   <br><br>
 
+  <form action="" method="POST">
+    <input type="name" name="keyword" size="40" placeholder="cari" autocomplete="off">
+    <button type="submit" name="cari">Cari</button>
+  </form>
+  <br>
+
   <table border="1" cellpadding="10" cellspacing="0">
     <tr>
       <th>No</th>
@@ -27,6 +36,14 @@ $mahasiswa = query("SELECT * FROM data");
       <th>Nama</th>
       <th>Aksi</th>
     </tr>
+
+    <?php if (empty($mahasiswa)) : ?>
+      <tr>
+        <td colspan="4">
+          <p>Data Tidak Ditemukan</p>
+        </td>
+      </tr>
+    <?php endif; ?>
 
     <?php $i = 1;
     foreach ($mahasiswa as $m) : ?>
